@@ -1,6 +1,6 @@
 :root {
-  --primary-color: #1d5888;
-  --secondary-color: #ff993b;
+  --primary-color: #423417;
+  --secondary-color: #ecc97e;
   --dark-color: #292929;
   --white-color: #dff3e4;
 }
@@ -24,6 +24,14 @@ h4,
 h5,
 h6 {
   color: var(--primary-color);
+  font-family: 'Titillium Web', sans-serif;
+}
+
+p,
+span,
+a {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
 }
 
 main > .container {
@@ -39,7 +47,6 @@ main > .container {
 
 .author-info {
   height: 46.64px;
-  font-weight: bold;
 }
 
 .social > a > img {
