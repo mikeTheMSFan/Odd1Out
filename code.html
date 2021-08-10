@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="h-100">
   <head>
-    <title>Odd1Out: A Coding Project by Michael Robinson</title>
+    <title>ODD1OUT: A Coding Project by Michael Robinson</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -69,7 +69,7 @@
             alt="double-m icon"
             width="30"
           />
-          <span class="ps-2">Odd1Out</span>
+          <span class="ps-2">ODD1OUT</span>
         </a>
         <button
           class="navbar-toggler"
@@ -119,25 +119,95 @@
     <main class="flex-shrink-0">
       <div class="container py-4 px-5 mt-5">
         <h2 class="border-1 border-bottom border-dark"
-          >The Code for the Odd1Out</h2
+          >The Code for the ODD1OUT</h2
         >
         <div class="row row-cols-1 row-cols-lg-2">
           <div class="col-lg-8">
             <pre class="line-numbers">
                   <code class="language-javascript">
-                    // Call Hello World
-                    function helloWorld() {
-                      alert('Hello World');
-                    }
+                    'use strict';
+
+//get the values fro the Page
+//start or controller function
+function getValues() {
+  //get values from the page
+  let startValue = document.getElementById('startValue').value;
+  let endValue = document.getElementById('endValue').value;
+
+  //parse into integers
+  startValue = parseInt(startValue);
+  endValue = parseInt(endValue);
+
+  //We need to validate our input
+  if (Number.isInteger(startValue) && Number.isInteger(endValue)) {
+    //we call generateNumbers
+    let numbers = generateNumbers(startValue, endValue);
+    //we call displayNumbers
+    displayNumbers(numbers);
+  } else {
+    alert('You must enter integers');
+  }
+}
+
+//generate numbers from startValuee to the endValue
+//logic function(s)
+function generateNumbers(startValue, endValue) {
+  let numbers = [];
+
+  //we want to get all numbers from start to end
+  for (let i = startValue; i <= endValue; i++) {
+    //this will execute in a loop until i = endValue.
+    numbers.push(i);
+  }
+  return numbers;
+}
+
+//display the number and mark even numbers bold
+//display or view functions
+function displayNumbers(numbers) {
+  let templateRows = " ";
+  for (let i = 0; i < numbers.length; i++) {
+    let number = numbers[i];
+    let className = 'even';
+    if (number % 2 === 0) {
+      className = 'even';
+    } else {
+      className = 'odd';
+    }
+    //This does not render correctly with Prisim see the source.
+    templateRows += `<tr><td class="${className}">${number}</td></tr>`;
+  }
+
+  document.getElementById('results').innerHTML = templateRows;
+}
+
                   </code>
               </pre>
           </div>
           <div class="col-lg-4">
-            <p>The Code is structured in one function</p>
-            <h5>Hello World</h5>
+            <h1>ODD1OUT</h1>
+            <p class="text-warning"
+              >WARNING: Our plugin does not display template literals
+              correctly. Please see git repo for the full source code.
+            </p>
+            <h2>getValues Function</h2>
             <p
-              >Hello World is a function that displays an alert with a message
-              called 'Hello World!'</p
+              >This function gets the start and end values from the UI,
+              validates that the inputs are integers, and calls the
+              generateNumbers function, passing in the start and end values.</p
+            >
+            <h2>generateNumbers Function</h2>
+            <p
+              >This function takes the start and end values provided by the UI
+              and pushes applicable numbers into an array.</p
+            >
+            <h2>displayNumbers Function</h2>
+            <p
+              >This function loops through the numbers array and changes the
+              class name of the row based on the divisibility of the number in
+              question. After, we add each formatted string to the templateRows
+              variable; and append the complete source code to the inner HTML of
+              the results table.</p
             >
           </div>
         </div>
