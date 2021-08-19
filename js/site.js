@@ -26,13 +26,17 @@ function getValues() {
 //logic function(s)
 function generateNumbers(startValue, endValue) {
   let numbers = [];
-
-  //we want to get all numbers from start to end
-  for (let i = startValue; i <= endValue; i++) {
-    //this will execute in a loop until i = endValue.
-    numbers.push(i);
+  //Makes sure no more than 100 Numbers are being parsed at a time.
+  if (endValue - startValue > 100 || endValue - startValue < 0) {
+    alert('Please choose POSITIVE values that result in 100 numbers or less.');
+  } else {
+    //we want to get all numbers from start to end
+    for (let i = startValue; i <= endValue; i++) {
+      //this will execute in a loop until i = endValue.
+      numbers.push(i);
+    }
+    return numbers;
   }
-  return numbers;
 }
 
 //display the number and mark even numbers bold

@@ -127,60 +127,62 @@
                   <code class="language-javascript">
                     'use strict';
 
-//get the values fro the Page
-//start or controller function
-function getValues() {
-  //get values from the page
-  let startValue = document.getElementById('startValue').value;
-  let endValue = document.getElementById('endValue').value;
-
-  //parse into integers
-  startValue = parseInt(startValue);
-  endValue = parseInt(endValue);
-
-  //We need to validate our input
-  if (Number.isInteger(startValue) && Number.isInteger(endValue)) {
-    //we call generateNumbers
-    let numbers = generateNumbers(startValue, endValue);
-    //we call displayNumbers
-    displayNumbers(numbers);
-  } else {
-    alert('You must enter integers');
-  }
-}
-
-//generate numbers from startValuee to the endValue
-//logic function(s)
-function generateNumbers(startValue, endValue) {
-  let numbers = [];
-
-  //we want to get all numbers from start to end
-  for (let i = startValue; i <= endValue; i++) {
-    //this will execute in a loop until i = endValue.
-    numbers.push(i);
-  }
-  return numbers;
-}
-
-//display the number and mark even numbers bold
-//display or view functions
-function displayNumbers(numbers) {
-  let templateRows = " ";
-  for (let i = 0; i < numbers.length; i++) {
-    let number = numbers[i];
-    let className = 'even';
-    if (number % 2 === 0) {
-      className = 'even';
-    } else {
-      className = 'odd';
-    }
-    //This does not render correctly with Prisim see the source.
-    templateRows += `<tr><td class="${className}">${number}</td></tr>`;
-  }
-
-  document.getElementById('results').innerHTML = templateRows;
-}
-
+                    //get the values fro the Page
+                    //start or controller function
+                    function getValues() {
+                      //get values from the page
+                      let startValue = document.getElementById('startValue').value;
+                      let endValue = document.getElementById('endValue').value;
+                    
+                      //parse into integers
+                      startValue = parseInt(startValue);
+                      endValue = parseInt(endValue);
+                    
+                      //We need to validate our input
+                      if (Number.isInteger(startValue) && Number.isInteger(endValue)) {
+                        //we call generateNumbers
+                        let numbers = generateNumbers(startValue, endValue);
+                        //we call displayNumbers
+                        displayNumbers(numbers);
+                      } else {
+                        alert('You must enter integers');
+                      }
+                    }
+                    
+                    //generate numbers from startValuee to the endValue
+                    //logic function(s)
+                    function generateNumbers(startValue, endValue) {
+                      let numbers = [];
+                      //Makes sure no more than 100 Numbers are being parsed at a time.
+                      if (endValue - startValue > 100 || endValue - startValue < 0) {
+                        alert('Please choose POSITIVE values that result in 100 numbers or less.');
+                      } else {
+                        //we want to get all numbers from start to end
+                        for (let i = startValue; i <= endValue; i++) {
+                          //this will execute in a loop until i = endValue.
+                          numbers.push(i);
+                        }
+                        return numbers;
+                      }
+                    }
+                    
+                    //display the number and mark even numbers bold
+                    //display or view functions
+                    function displayNumbers(numbers) {
+                      let templateRows = '';
+                      for (let i = 0; i < numbers.length; i++) {
+                        let number = numbers[i];
+                        let className = 'even';
+                        if (number % 2 === 0) {
+                          className = 'even';
+                        } else {
+                          className = 'odd';
+                        }
+                        templateRows += `<tr><td class="${className}">${number}</td></tr>`;
+                      }
+                    
+                      document.getElementById('results').innerHTML = templateRows;
+                    }                    
                   </code>
               </pre>
           </div>
@@ -192,9 +194,9 @@ function displayNumbers(numbers) {
             </p>
             <h2>getValues Function</h2>
             <p
-              >This function gets the start and end values from the UI,
-              validates that the inputs are integers, and calls the
-              generateNumbers function, passing in the start and end values.</p
+              >This function first checks if the start and end values evaluate
+              to a number that is between 0 and 100. If so, we take the start
+              and end values and push the applicable numbers into an array.</p
             >
             <h2>generateNumbers Function</h2>
             <p
